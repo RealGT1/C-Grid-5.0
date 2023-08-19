@@ -9,66 +9,67 @@ To uphold objectivity and circumvent any potential biases, the utilized dataset 
 
 ## Approach
 
-### **1) Rank Based Product Recommendation**
-Objective -
-* Recommend products with highest number of ratings.
-* Target new customers with most popular products.
-* Solve the [Cold Start Problem](https://github.com/Vaibhav67979/Ecommerce-product-recommendation-system/blob/18d7fb2b8feafd117f7c3f9f859255c2e28cfbe4/ColdStartProblem.md)
+1) Ranking-Oriented Product Recommendations
+Core Goal:
 
-Outputs -
-* Recommend top 5 products with 50/100 minimum ratings/interactions.
+Identify products with the most substantial count of ratings.
+Direct attention towards popular products for new customers.
+Mitigate the 'Cold Start' predicament.
+Outputs:
 
-Approach -
-* Calculate average rating for each product.
-* Calculate total number of ratings for each product.
-* Create a DataFrame using these values and sort it by average.
-* Write a function to get 'n' top products with specified minimum number of interactions.
+Suggest the foremost 5 products with a minimum of 50 or 100 ratings/interactions.
+Approach:
+
+Calculate the average rating for each product.
+Tally the overall count of ratings for each product.
+Construct a DataFrame using these metrics and arrange it based on the average rating.
+Devise a function to extract the top 'n' products with a specified minimum number of interactions.
 
 
-### **2) Similarity based Collaborative filtering**
-Objective -
-* Provide personalized and relevant recommendations to users.
+2) Collaborative Filtering Based on Similarity
+Principal Aim:
 
-Outputs -
-* Recommend top 5 products based on interactions of similar users.
+Furnish users with personalized and pertinent recommendations.
+Outputs:
 
-Approach -
-* Here, user_id is of object, for our convenience we convert it to value of 0 to 1539(integer type).
-* We write a function to find similar users - 
-  1. Find the similarity score of the desired user with each user in the interaction matrix using cosine_similarity and append to an empty list and sort it.
-  2. extract the similar user and similarity scores from the sorted list 
-  3. remove original user and its similarity score and return the rest.
-* We write a function to recommend users - 
-  1. Call the previous similar users function to get the similar users for the desired user_id.
-  2. Find prod_ids with which the original user has interacted -> observed_interactions
-  3. For each similar user Find 'n' products with which the similar user has interacted with but not the actual user.
-  4. return the specified number of products. 
+Propose the leading 5 products grounded on interactions of akin users.
+Approach:
 
-### **3) Model based Collaborative filtering**
-Objective -
-* Provide personalized recommendations to users based on their past behavior and preferences, while also addressing the challenges of sparsity and scalability that can arise in other collaborative filtering techniques.
+Transform user IDs into values from 0 to 1539 (integer format) for convenience.
+Craft a function to ascertain analogous users:
+Compute the similarity score between the target user and each user in the interaction matrix using cosine_similarity; subsequently, catalog the scores and sort them.
+Isolate the analogous user IDs and their associated similarity scores from the ranked list.
+Exclude the original user and its corresponding similarity score, retaining the rest for analysis.
+Develop a function for generating user recommendations:
+Invoke the earlier function to acquire comparable users for the specified user ID.
+Retrieve the product IDs associated with the original user's interactions (observed_interactions).
+For each similar user, identify 'n' products they've interacted with but the original user hasn't, subsequently presenting these products as recommendations.
 
-Outputs -
-* Recommend top 5 products for a particular user.
+3) Model-Driven Collaborative Filtering
+Core Objective:
 
-Approach -
-* Taking the matrix of product ratings and converting it to a CSR(compressed sparse row) matrix. This is done to save memory and computational time, since only the non-zero values need to be stored.
-* Performing singular value decomposition (SVD) on the sparse or csr matrix. SVD is a matrix decomposition technique that can be used to reduce the dimensionality of a matrix. In this case, the SVD is used to reduce the dimensionality of the matrix of product ratings to 50 latent features.
-* Calculating the predicted ratings for all users using SVD. The predicted ratings are calculated by multiplying the U matrix, the sigma matrix, and the Vt matrix.
-* Storing the predicted ratings in a DataFrame. The DataFrame has the same columns as the original matrix of product ratings. The rows of the DataFrame correspond to the users. The values in the DataFrame are the predicted ratings for each user.
-* A funtion is written to recommend products based on the rating predictions made : 
-  1. It gets the user's ratings from the interactions_matrix.
-  2. It gets the user's predicted ratings from the preds_matrix.
-  3. It creates a DataFrame with the user's actual and predicted ratings.
-  4. It adds a column to the DataFrame with the product names.
-  5. It filters the DataFrame to only include products that the user has not rated.
-  6. It sorts the DataFrame by the predicted ratings in descending order.
-  7. It prints the top num_recommendations products.
-* Evaluating the model :
-  1. Calculate the average rating for all the movies by dividing the sum of all the ratings by the number of ratings.
-  2, Calculate the average rating for all the predicted ratings by dividing the sum of all the predicted ratings by the number of ratings.
-  3. Create a DataFrame called rmse_df that contains the average actual ratings and the average predicted ratings.
-  4. Calculate the RMSE of the SVD model by taking the square root of the mean of the squared errors between the average actual ratings and the average predicted ratings.
+Provide individualized recommendations based on user history, tackling the sparsity and scalability challenges that conventional collaborative filtering can encounter.
+Outputs:
 
-> The squared parameter in the mean_squared_error function determines whether to return the mean squared error (MSE) or the root mean squared error (RMSE). When squared is set to False, the function returns the RMSE, which is the square root of the MSE. In this case, you are calculating the RMSE, so you have set squared to False. This means that the errors are first squared, then averaged, and finally square-rooted to obtain the RMSE.
-     
+Suggest the finest 5 products for a specific user.
+Approach:
+
+Transform the matrix of product ratings into a compressed sparse row (CSR) matrix, enhancing memory efficiency by storing only non-zero values.
+Perform singular value decomposition (SVD) on the CSR matrix, a dimensionality reduction technique that condenses the product ratings matrix into 50 latent features.
+Compute projected ratings for all users via SVD, obtained by multiplying the U matrix, sigma matrix, and Vt matrix.
+Capture the anticipated ratings within a DataFrame mirroring the original product ratings matrix. Users are represented in rows, while columns correspond to products; the DataFrame values indicate predicted ratings.
+Construct a function to recommend products rooted in rating forecasts:
+Retrieve the user's ratings from the interactions_matrix.
+Acquire the user's projected ratings from the preds_matrix.
+Construct a DataFrame incorporating both actual and anticipated ratings.
+Incorporate a column for product names in the DataFrame.
+Filter the DataFrame to encompass products the user hasn't yet rated.
+Sort the DataFrame in descending order by predicted ratings.
+Showcase the top num_recommendations products.
+
+Model Evaluation:
+Compute the mean rating for all products by dividing the aggregate rating sum by the total number of ratings.
+Calculate the average rating for predicted ratings in a parallel manner.
+Assemble an RMSE_df DataFrame containing mean actual and projected ratings.
+Derive the root mean squared error (RMSE) of the SVD model by extracting the square root of the mean squared errors between average actual and projected ratings.
+The squared parameter within the mean_squared_error function determines whether to output mean squared error (MSE) or RMSE. By setting squared to False, the function returns the RMSE, which entails squaring errors, averaging them, and finally taking the square root for RMSE computation.
