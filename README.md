@@ -8,7 +8,7 @@ To ensure impartiality and mitigate potential biases, the employed dataset compr
 
 ## Methodological Approach
 
-### Ranking-Oriented Product Recommendations
+### 1. Ranking-Oriented Product Recommendations
 
 **Core Goal:** Identify products with a substantial count of ratings, focusing on popular choices for new customers, and addressing the 'Cold Start' challenge.
 
@@ -20,7 +20,7 @@ To ensure impartiality and mitigate potential biases, the employed dataset compr
 3. Construct a DataFrame using these metrics and organize it by average rating.
 4. Develop a function to extract the top 'n' products with a specified minimum number of interactions.
 
-### Collaborative Filtering Based on Similarity
+### 2. Collaborative Filtering Based on Similarity
 
 **Principal Aim:** Deliver personalized and relevant recommendations to users.
 
@@ -36,7 +36,7 @@ To ensure impartiality and mitigate potential biases, the employed dataset compr
    - Retrieve product IDs associated with the original user's interactions (observed_interactions).
    - For each similar user, identify 'n' products they've interacted with but the original user hasn't, thus offering recommendations.
 
-### Model-Driven Collaborative Filtering
+### 3. Model-Driven Collaborative Filtering
 
 **Core Objective:** Provide tailored recommendations based on user history while addressing sparsity and scalability challenges.
 
