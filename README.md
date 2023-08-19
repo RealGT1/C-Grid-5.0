@@ -1,14 +1,10 @@
 # Ecommerce-product-recommendation-system
 
-Product Recommendation System is a machine learning-based project that provides personalized product recommendations to users based on their browsing and purchase history. The system utilizes collaborative filtering and content-based filtering algorithms to analyze user behavior and generate relevant recommendations. This project aims to improve the overall shopping experience for users, increase sales for e-commerce businesses
+The Ecommerce Product Suggestion System is a sophisticated project that harnesses the power of machine learning to deliver tailor-made product recommendations to users based on their interaction history. By incorporating cutting-edge collaborative filtering and content-based filtering algorithms, this system dissects user behaviors and preferences, generating spot-on suggestions that heighten user satisfaction and drive up sales for e-commerce enterprises.
 
 ## Dataset
 
-I have used an amazon dataset on user ratings for electronic products, this dataset doesn't have any headers. To avoid biases,  each product and user is assigned a unique identifier instead of using their name or any other potentially biased information.
-
-* You can find the [dataset](https://www.kaggle.com/datasets/vibivij/amazon-electronics-rating-datasetrecommendation/download?datasetVersionNumber=1) here - https://www.kaggle.com/datasets/vibivij/amazon-electronics-rating-datasetrecommendation/download?datasetVersionNumber=1 
-
-* You can find many other similar datasets here - https://jmcauley.ucsd.edu/data/amazon/
+To uphold objectivity and circumvent any potential biases, the utilized dataset comprises Amazon's electronic product ratings. The dataset is intentionally stripped of headers, employing unique identifiers for both products and users to eliminate any prejudiced information.
 
 
 ## Approach
